@@ -29,6 +29,8 @@ AI and more. Built with the **MERN stack** and **Tailwind CSS**.
 
 ```
 shansofts/
+├── api/
+│   └── index.js            # Vercel serverless entry (re-exports the Express app)
 ├── client/                 # React + Vite + Tailwind frontend
 │   ├── public/             # favicon, robots.txt, sitemap.xml
 │   └── src/
@@ -38,8 +40,11 @@ shansofts/
 ├── server/                 # Express + MongoDB API
 │   ├── models/             # Mongoose schemas
 │   ├── routes/             # /api/contact
-│   └── index.js            # App entry
-└── package.json            # Root scripts (run both apps together)
+│   ├── db.js               # Cached MongoDB connection (serverless-safe)
+│   ├── app.js              # Configured Express app (shared by local + Vercel)
+│   └── index.js            # Local dev entry (app.listen)
+├── vercel.json             # Single-project deploy config (frontend + API)
+└── package.json            # Root scripts + backend deps for Vercel functions
 ```
 
 ## 🚀 Getting Started
@@ -72,6 +77,32 @@ MONGODB_URI=mongodb://127.0.0.1:27017/shansofts
 CLIENT_ORIGIN=http://localhost:5173
 ```
 
+### 2b. Enable contact-form emails (optional)
+
+The contact form always saves enquiries to MongoDB. To also **receive an email**
+whenever someone submits it, configure SMTP (any provider works).
+
+**Hostinger** (using a mailbox created in hPanel → Emails):
+
+```env
+SMTP_HOST=smtp.hostinger.com
+SMTP_PORT=465
+SMTP_USER=info@shansofts.com     # your Hostinger mailbox address
+SMTP_PASS=your-mailbox-password  # that mailbox's password
+MAIL_TO=info@shansofts.com       # where enquiries are delivered
+MAIL_FROM=Shansofts Website <info@shansofts.com>
+```
+
+**Gmail** alternative: enable 2-Step Verification, create an
+[App Password](https://myaccount.google.com/apppasswords), then use
+`SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=465`, your address, and the app password.
+
+Add the same values to your **Vercel Environment Variables** for production.
+
+On startup the server logs `✅ Email (SMTP) ready` when configured, or a warning if
+not. If SMTP is left empty, the form still works — it just saves to the DB without
+sending email.
+
 ### 3. Run in development
 
 To run the frontend and backend together (requires the root dev dependency `concurrently`):
@@ -96,8 +127,40 @@ The Vite dev server proxies `/api` requests to the backend automatically.
 npm run build        # builds the client into client/dist
 ```
 
-Serve `client/dist` with any static host (Netlify, Vercel, Nginx…) and deploy the
-`server/` API separately (Render, Railway, a VPS, etc.).
+## ▲ Deploy to Vercel (frontend + backend, one project)
+
+This repo is configured so a **single Vercel project** serves both the React
+frontend (as static files) and the Express API (as a serverless function). No
+separate backend host is required.
+
+**How it works** (`vercel.json`):
+
+- The client is built to `client/dist` and served as static assets.
+- `api/index.js` re-exports the Express app from `server/app.js`; every request to
+  `/api/*` is routed to it. Backend dependencies live in the **root** `package.json`
+  so Vercel bundles them into the function.
+- All other routes fall back to `index.html` for client-side routing.
+- MongoDB uses a **cached connection** (`server/db.js`) so serverless invocations
+  reuse a single pooled connection instead of reconnecting each request.
+
+**Steps:**
+
+1. Push the repo to GitHub (already done for this project).
+2. In Vercel, **Add New → Project** and import the repository. Keep the default
+   root directory (`./`) — the settings come from `vercel.json`.
+3. Add an **Environment Variable**:
+   - `MONGODB_URI` → your **MongoDB Atlas** connection string (a local
+     `mongodb://127.0.0.1` URI won't work from Vercel's servers).
+   - *(optional)* `CLIENT_ORIGIN` → your production domain(s), comma-separated.
+4. Click **Deploy**. Your site and API are live on the same domain, e.g.
+   `https://your-app.vercel.app` and `https://your-app.vercel.app/api/health`.
+
+> Or deploy from the CLI: `npm i -g vercel` then run `vercel` (preview) /
+> `vercel --prod` from the project root.
+
+You can also deploy the pieces separately if you prefer: serve `client/dist` on any
+static host and run `server/` (via `npm start --prefix server`) on Render, Railway,
+a VPS, etc. — just point the frontend at that API's origin.
 
 ## 🔌 API Reference
 

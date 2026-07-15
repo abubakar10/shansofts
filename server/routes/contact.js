@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import mongoose from 'mongoose'
 import Contact from '../models/Contact.js'
+import { sendContactEmail } from '../mailer.js'
 
 const router = Router()
 
@@ -20,17 +21,30 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ success: false, message: errors.join(' ') })
     }
 
-    // If DB isn't connected, don't hard-fail the UX — log and acknowledge.
-    if (mongoose.connection.readyState !== 1) {
+    const payload = { name, email, company, service, message }
+
+    // Persist to the database when connected (don't hard-fail if it isn't).
+    let saved = null
+    if (mongoose.connection.readyState === 1) {
+      saved = await Contact.create(payload)
+    } else {
       console.warn('[contact] MongoDB not connected — enquiry not persisted:', { name, email })
-      return res.status(202).json({
-        success: true,
-        message: 'Message received. (Note: database is not connected in this environment.)',
-      })
     }
 
-    const contact = await Contact.create({ name, email, company, service, message })
-    return res.status(201).json({ success: true, id: contact._id, message: 'Message sent successfully.' })
+    // Send the notification email. Failure here shouldn't lose the enquiry.
+    let emailed = false
+    try {
+      emailed = await sendContactEmail(payload)
+    } catch (mailErr) {
+      console.error('[contact] email send failed:', mailErr.message)
+    }
+
+    return res.status(saved ? 201 : 202).json({
+      success: true,
+      id: saved?._id,
+      emailed,
+      message: 'Message sent successfully.',
+    })
   } catch (err) {
     console.error('[contact] error:', err)
     return res.status(500).json({ success: false, message: 'Server error. Please try again later.' })

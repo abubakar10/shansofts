@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import SEO from '../components/SEO'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
@@ -27,8 +28,7 @@ export default function Services() {
         jsonLd={jsonLd}
       />
 
-      <section className="relative overflow-hidden py-16 sm:py-20">
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-[700px] -translate-x-1/2 rounded-full bg-brand-600/20 blur-[120px]" />
+      <section className="relative py-16 sm:py-20">
         <div className="container-app">
           <SectionHeading
             eyebrow="Our services"
@@ -43,26 +43,30 @@ export default function Services() {
           {services.map((service, i) => {
             const Icon = service.icon
             return (
-              <Reveal key={service.slug} delay={(i % 2) * 0.08}>
-                <article className="card flex h-full gap-5">
-                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-600/30 to-accent-500/20 text-brand-300">
+              <Reveal key={service.slug} delay={(i % 2) * 0.08} scale>
+                <motion.article
+                  whileHover={{ y: -6 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="card group flex h-full gap-5 hover:border-brand-200 hover:shadow-card-hover"
+                >
+                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-100 to-accent-100 text-brand-600 shadow-sm transition-all duration-300 group-hover:from-brand-600 group-hover:to-accent-500 group-hover:text-white group-hover:shadow-glow">
                     <Icon size={26} />
                   </div>
                   <div>
-                    <h2 className="font-display text-xl font-semibold text-white">{service.title}</h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-400">{service.description}</p>
+                    <h2 className="font-display text-xl font-semibold text-slate-900">{service.title}</h2>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{service.description}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {service.features.map((f) => (
                         <span
                           key={f}
-                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300"
+                          className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600"
                         >
                           {f}
                         </span>
                       ))}
                     </div>
                   </div>
-                </article>
+                </motion.article>
               </Reveal>
             )
           })}

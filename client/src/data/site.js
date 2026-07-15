@@ -2,7 +2,7 @@ export const site = {
   name: 'Shansofts',
   tagline: 'IT & Software Solutions',
   domain: 'https://www.shansofts.com',
-  email: 'hello@shansofts.com',
+  email: 'info@shansofts.com',
   phone: '+1 (555) 012-3456',
   address: 'Remote-first · Serving clients worldwide',
   social: {
@@ -26,4 +26,21 @@ export const stats = [
   { value: '60+', label: 'Happy Clients' },
   { value: '8+', label: 'Years Experience' },
   { value: '24/7', label: 'Support' },
+]
+
+export const techStack = [
+  'React',
+  'Node.js',
+  'MongoDB',
+  'Express',
+  'Next.js',
+  'React Native',
+  'TypeScript',
+  'Tailwind CSS',
+  'AWS',
+  'Docker',
+  'GraphQL',
+  'PostgreSQL',
+  'Flutter',
+  'Python',
 ]

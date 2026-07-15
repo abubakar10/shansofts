@@ -7,6 +7,9 @@ import { site } from '../data/site'
 
 const initialForm = { name: '', email: '', company: '', service: '', message: '' }
 
+const inputClass =
+  'w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100'
+
 export default function Contact() {
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState('idle') // idle | loading | success | error
@@ -48,8 +51,7 @@ export default function Contact() {
         path="/contact"
       />
 
-      <section className="relative overflow-hidden py-16 sm:py-20">
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-[700px] -translate-x-1/2 rounded-full bg-brand-600/20 blur-[120px]" />
+      <section className="relative py-16 sm:py-20">
         <div className="container-app">
           <SectionHeading
             eyebrow="Contact us"
@@ -61,23 +63,23 @@ export default function Contact() {
 
       <section className="pb-8">
         <div className="container-app grid gap-8 lg:grid-cols-5">
-          <Reveal className="lg:col-span-2">
+          <Reveal direction="right" className="lg:col-span-2">
             <div className="flex h-full flex-col gap-4">
               {contactInfo.map((c) => {
                 const Icon = c.icon
                 const inner = (
-                  <div className="card flex items-center gap-4">
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-600/20 text-brand-300">
+                  <div className="card flex items-center gap-4 hover:-translate-y-0.5 hover:shadow-card-hover">
+                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-100 to-accent-100 text-brand-600">
                       <Icon size={20} />
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wider text-slate-500">{c.label}</div>
-                      <div className="text-sm font-medium text-white">{c.value}</div>
+                      <div className="text-xs uppercase tracking-wider text-slate-400">{c.label}</div>
+                      <div className="text-sm font-semibold text-slate-800">{c.value}</div>
                     </div>
                   </div>
                 )
                 return c.href ? (
-                  <a key={c.label} href={c.href} className="transition-transform hover:-translate-y-0.5">
+                  <a key={c.label} href={c.href} className="block transition-transform">
                     {inner}
                   </a>
                 ) : (
@@ -85,18 +87,18 @@ export default function Contact() {
                 )
               })}
 
-              <div className="card mt-auto">
+              <div className="card mt-auto bg-gradient-to-br from-brand-600 to-grape-600 text-white">
                 <h3 className="font-display font-semibold text-white">Why work with us?</h3>
-                <ul className="mt-3 space-y-2 text-sm text-slate-400">
-                  <li className="flex items-center gap-2"><FiCheckCircle className="text-accent-400" /> Free project consultation</li>
-                  <li className="flex items-center gap-2"><FiCheckCircle className="text-accent-400" /> Transparent, fixed pricing</li>
-                  <li className="flex items-center gap-2"><FiCheckCircle className="text-accent-400" /> Dedicated project manager</li>
+                <ul className="mt-3 space-y-2 text-sm text-brand-50">
+                  <li className="flex items-center gap-2"><FiCheckCircle className="text-accent-300" /> Free project consultation</li>
+                  <li className="flex items-center gap-2"><FiCheckCircle className="text-accent-300" /> Transparent, fixed pricing</li>
+                  <li className="flex items-center gap-2"><FiCheckCircle className="text-accent-300" /> Dedicated project manager</li>
                 </ul>
               </div>
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="lg:col-span-3">
+          <Reveal direction="left" delay={0.1} className="lg:col-span-3">
             <form onSubmit={handleSubmit} className="card space-y-5" noValidate>
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Full name" name="name" value={form.name} onChange={handleChange} required placeholder="Jane Doe" />
@@ -105,16 +107,10 @@ export default function Contact() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Company" name="company" value={form.company} onChange={handleChange} placeholder="Acme Inc." />
                 <div>
-                  <label htmlFor="service" className="mb-1.5 block text-sm font-medium text-slate-300">
+                  <label htmlFor="service" className="mb-1.5 block text-sm font-medium text-slate-700">
                     Service
                   </label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={form.service}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-white/10 bg-ink-900 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/40"
-                  >
+                  <select id="service" name="service" value={form.service} onChange={handleChange} className={inputClass}>
                     <option value="">Select a service</option>
                     <option>Web Development</option>
                     <option>Mobile App Development</option>
@@ -128,8 +124,8 @@ export default function Contact() {
                 </div>
               </div>
               <div>
-                <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-300">
-                  Project details <span className="text-brand-400">*</span>
+                <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-700">
+                  Project details <span className="text-brand-500">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -139,17 +135,17 @@ export default function Contact() {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Tell us about your goals, timeline and budget..."
-                  className="w-full rounded-xl border border-white/10 bg-ink-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/40"
+                  className={inputClass}
                 />
               </div>
 
               {status === 'success' && (
-                <div className="flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+                <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
                   <FiCheckCircle /> Thanks! Your message has been sent. We&apos;ll be in touch shortly.
                 </div>
               )}
               {status === 'error' && (
-                <div className="flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                <div className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                   <FiAlertCircle /> {error}
                 </div>
               )}
@@ -168,8 +164,8 @@ export default function Contact() {
 function Field({ label, name, type = 'text', value, onChange, required, placeholder }) {
   return (
     <div>
-      <label htmlFor={name} className="mb-1.5 block text-sm font-medium text-slate-300">
-        {label} {required && <span className="text-brand-400">*</span>}
+      <label htmlFor={name} className="mb-1.5 block text-sm font-medium text-slate-700">
+        {label} {required && <span className="text-brand-500">*</span>}
       </label>
       <input
         id={name}
@@ -179,7 +175,7 @@ function Field({ label, name, type = 'text', value, onChange, required, placehol
         onChange={onChange}
         required={required}
         placeholder={placeholder}
-        className="w-full rounded-xl border border-white/10 bg-ink-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/40"
+        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100"
       />
     </div>
   )

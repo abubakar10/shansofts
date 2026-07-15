@@ -3,6 +3,7 @@ import SEO from '../components/SEO'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import CTASection from '../components/CTASection'
+import Counter from '../components/Counter'
 import { stats } from '../data/site'
 
 const values = [
@@ -21,8 +22,7 @@ export default function About() {
         path="/about"
       />
 
-      <section className="relative overflow-hidden py-16 sm:py-20">
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-80 w-[700px] -translate-x-1/2 rounded-full bg-brand-600/20 blur-[120px]" />
+      <section className="relative py-16 sm:py-20">
         <div className="container-app">
           <SectionHeading
             eyebrow="About Shansofts"
@@ -34,25 +34,25 @@ export default function About() {
 
       <section className="pb-8">
         <div className="container-app grid gap-6 md:grid-cols-2">
-          <Reveal>
-            <div className="card h-full">
-              <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-600/30 to-accent-500/20 text-brand-300">
+          <Reveal direction="right">
+            <div className="card h-full hover:-translate-y-1 hover:shadow-card-hover">
+              <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-100 to-accent-100 text-brand-600">
                 <FiTarget size={22} />
               </div>
-              <h2 className="mt-5 font-display text-xl font-semibold text-white">Our Mission</h2>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
+              <h2 className="mt-5 font-display text-xl font-semibold text-slate-900">Our Mission</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 To help businesses of every size harness technology through custom software that is fast,
                 secure and built to scale — delivered by a team that genuinely cares about outcomes.
               </p>
             </div>
           </Reveal>
-          <Reveal delay={0.08}>
-            <div className="card h-full">
-              <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-600/30 to-accent-500/20 text-brand-300">
+          <Reveal direction="left" delay={0.08}>
+            <div className="card h-full hover:-translate-y-1 hover:shadow-card-hover">
+              <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-100 to-accent-100 text-brand-600">
                 <FiEye size={22} />
               </div>
-              <h2 className="mt-5 font-display text-xl font-semibold text-white">Our Vision</h2>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
+              <h2 className="mt-5 font-display text-xl font-semibold text-slate-900">Our Vision</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 To be the go-to technology partner for ambitious teams worldwide — known for craftsmanship,
                 reliability and long-term partnerships that drive real growth.
               </p>
@@ -61,20 +61,20 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section border-t border-white/10 bg-white/[0.02]">
+      <section className="section">
         <div className="container-app">
           <SectionHeading eyebrow="Our values" title="What we stand for" />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => {
               const Icon = v.icon
               return (
-                <Reveal key={v.title} delay={(i % 4) * 0.08}>
-                  <div className="card h-full">
-                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-brand-600/20 text-brand-300">
+                <Reveal key={v.title} delay={(i % 4) * 0.1} scale>
+                  <div className="card group h-full hover:-translate-y-2 hover:shadow-card-hover">
+                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-brand-100 text-brand-600 transition-all group-hover:bg-gradient-to-br group-hover:from-brand-600 group-hover:to-accent-500 group-hover:text-white">
                       <Icon size={20} />
                     </div>
-                    <h3 className="mt-4 font-display font-semibold text-white">{v.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-400">{v.text}</p>
+                    <h3 className="mt-4 font-display font-semibold text-slate-900">{v.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{v.text}</p>
                   </div>
                 </Reveal>
               )
@@ -86,9 +86,14 @@ export default function About() {
       <section className="section">
         <div className="container-app grid grid-cols-2 gap-6 md:grid-cols-4">
           {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08} className="rounded-2xl border border-white/10 bg-white/[0.03] py-8 text-center">
-              <div className="font-display text-3xl font-bold gradient-text sm:text-4xl">{s.value}</div>
-              <div className="mt-1 text-sm text-slate-400">{s.label}</div>
+            <Reveal
+              key={s.label}
+              delay={i * 0.08}
+              scale
+              className="rounded-2xl border border-slate-200/80 bg-white/70 py-8 text-center shadow-soft backdrop-blur"
+            >
+              <Counter value={s.value} className="font-display text-3xl font-bold gradient-text sm:text-4xl" />
+              <div className="mt-1 text-sm text-slate-500">{s.label}</div>
             </Reveal>
           ))}
         </div>

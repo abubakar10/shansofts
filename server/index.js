@@ -1,65 +1,26 @@
 import 'dotenv/config'
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
-import rateLimit from 'express-rate-limit'
-import contactRoutes from './routes/contact.js'
+import app from './app.js'
+import { connectDB } from './db.js'
+import { isMailConfigured, verifyMailer } from './mailer.js'
 
-const app = express()
 const PORT = process.env.PORT || 5000
 
-// --- Middleware ---
-const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5173')
-  .split(',')
-  .map((o) => o.trim())
-
-app.use(
-  cors({
-    origin: (origin, cb) => {
-      // Allow same-origin / server-to-server (no origin) and whitelisted origins
-      if (!origin || allowedOrigins.includes(origin)) return cb(null, true)
-      return cb(null, true) // relax in dev; tighten for production if needed
-    },
+// Connect eagerly in local/long-running environments (optional — the API also
+// connects lazily per request via the /api middleware).
+connectDB()
+  .then((conn) => {
+    if (conn) console.log('✅ MongoDB connected')
+    else console.warn('⚠️  MONGODB_URI not set — API will run without persistence.')
   })
-)
-app.use(express.json({ limit: '1mb' }))
+  .catch((err) => console.error('⚠️  MongoDB connection failed:', err.message))
 
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-})
-app.use('/api', apiLimiter)
-
-// --- Routes ---
-app.get('/api/health', (_req, res) => {
-  res.json({
-    status: 'ok',
-    db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
-    time: new Date().toISOString(),
-  })
-})
-
-app.use('/api/contact', contactRoutes)
-
-app.use((_req, res) => res.status(404).json({ success: false, message: 'Not found' }))
-
-// --- Startup ---
-async function start() {
-  const uri = process.env.MONGODB_URI
-  if (uri) {
-    try {
-      await mongoose.connect(uri)
-      console.log('✅ MongoDB connected')
-    } catch (err) {
-      console.error('⚠️  MongoDB connection failed — API will run without persistence:', err.message)
-    }
-  } else {
-    console.warn('⚠️  MONGODB_URI not set — API will run without persistence.')
-  }
-
-  app.listen(PORT, () => console.log(`🚀 Shansofts API running on http://localhost:${PORT}`))
+// Report email configuration status.
+if (!isMailConfigured()) {
+  console.warn('✉️  Email not configured — contact form will save but NOT send email. Set SMTP_* env vars.')
+} else {
+  verifyMailer()
+    .then(() => console.log('✅ Email (SMTP) ready'))
+    .catch((err) => console.error('⚠️  SMTP verification failed:', err.message))
 }
 
-start()
+app.listen(PORT, () => console.log(`🚀 Shansofts API running on http://localhost:${PORT}`))
