@@ -1,29 +1,32 @@
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { FiArrowRight } from 'react-icons/fi'
 
 export default function ServiceCard({ service }) {
   const Icon = service.icon
   return (
     <motion.div
-      whileHover={{ y: -8 }}
+      whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="card group relative h-full overflow-hidden hover:border-brand-200 hover:shadow-card-hover"
+      className="card group relative h-full overflow-hidden hover:border-brand-300 hover:shadow-card-hover"
     >
-      {/* hover gradient wash */}
-      <div className="pointer-events-none absolute inset-0 -z-0 bg-gradient-to-br from-brand-50 via-transparent to-accent-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
       <div className="relative">
-        <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-100 to-accent-100 text-brand-600 shadow-sm transition-all duration-300 group-hover:from-brand-600 group-hover:to-accent-500 group-hover:text-white group-hover:shadow-glow">
-          <Icon size={22} />
-        </div>
-        <h3 className="mt-5 font-display text-lg font-semibold text-slate-900">{service.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">{service.short}</p>
+        <Icon size={28} className="text-brand-600" strokeWidth={1.75} />
+        <h3 className="mt-5 font-display text-lg font-semibold text-heading">{service.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-body">{service.short}</p>
         <ul className="mt-4 space-y-1.5">
           {service.features.map((f) => (
-            <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
-              <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-brand-500 to-accent-500" /> {f}
+            <li key={f} className="flex items-center gap-2 text-sm text-body">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-600" /> {f}
             </li>
           ))}
         </ul>
+        <Link
+          to="/contact"
+          className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700"
+        >
+          Get a quote <FiArrowRight />
+        </Link>
       </div>
     </motion.div>
   )

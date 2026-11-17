@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #16a34a;
+  --color-primary-dark: #15803d;
+  --color-forest: #14532d;
+  --color-light-green: #f0fdf4;
+  --color-white: #ffffff;
+  --color-background: #f8fafc;
+  --color-heading: #111827;
+  --color-text: #64748b;
+  --color-border: #e5e7eb;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -9,26 +21,35 @@
   }
 
   body {
-    @apply overflow-x-hidden bg-slate-50 text-slate-700 font-sans antialiased;
+    @apply overflow-x-hidden bg-white font-sans antialiased text-body;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-heading;
   }
 
   ::selection {
-    @apply bg-brand-500/20 text-brand-800;
+    background-color: rgba(22, 163, 74, 0.18);
+    color: #14532d;
   }
 
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-slate-100;
+    background: #f8fafc;
   }
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-slate-300;
+    @apply rounded-full bg-brand-300;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-brand-400;
+    background: var(--color-primary);
   }
 }
 
@@ -38,45 +59,47 @@
   }
 
   .btn {
-    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
   }
 
   .btn-primary {
-    @apply btn bg-gradient-to-r from-brand-600 via-brand-500 to-accent-500 bg-[length:200%_auto] text-white shadow-glow hover:bg-[position:right_center] hover:shadow-[0_25px_60px_-18px_rgba(31,64,245,0.7)] active:scale-[0.97];
+    @apply btn bg-brand-600 text-white shadow-glow hover:bg-brand-700 active:scale-[0.97];
   }
 
   .btn-ghost {
-    @apply btn border border-slate-200 bg-white/70 text-slate-700 backdrop-blur hover:border-brand-300 hover:bg-white hover:text-brand-700 hover:shadow-soft active:scale-[0.97];
+    @apply btn border border-brand-600 bg-white text-brand-600 hover:bg-brand-50 active:scale-[0.97];
+  }
+
+  .btn-white {
+    @apply btn bg-white text-brand-700 hover:bg-brand-50 active:scale-[0.97];
   }
 
   .card {
-    @apply rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-soft backdrop-blur-sm transition-all duration-300;
+    @apply rounded-2xl border border-line bg-white p-6 shadow-soft transition-all duration-300;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-brand-600 via-grape-500 to-accent-500 bg-clip-text text-transparent;
+    @apply text-brand-600;
   }
 
   .gradient-text-animated {
-    @apply bg-gradient-to-r from-brand-600 via-grape-500 to-accent-500 bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient;
+    @apply text-brand-600;
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-brand-200/70 bg-brand-50/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-700 shadow-sm backdrop-blur;
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-700;
   }
 
   .social-btn {
-    @apply grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-500 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-600 hover:shadow-soft;
+    @apply grid h-10 w-10 place-items-center rounded-full border border-line bg-white text-body transition-all hover:-translate-y-0.5 hover:border-brand-600 hover:text-brand-600;
   }
 
   .section {
-    @apply py-20 sm:py-28;
+    @apply py-16 sm:py-24;
   }
 
-  /* Gradient border wrapper */
   .gradient-border {
-    @apply relative rounded-2xl p-[1.5px];
-    background-image: linear-gradient(120deg, rgba(53,99,255,0.5), rgba(34,211,238,0.4), rgba(139,92,246,0.5));
+    @apply relative rounded-2xl border border-line;
   }
 }
 

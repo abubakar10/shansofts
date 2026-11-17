@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
 
+# Prefer crawlable marketing and blog content
+Allow: /blog
+Allow: /services
+Allow: /portfolio
+Allow: /about
+Allow: /contact
+
+# Disallow non-content utility paths if added later
+Disallow: /404
+
 Sitemap: https://www.shansofts.com/sitemap.xml
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /

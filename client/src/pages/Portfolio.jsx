@@ -36,9 +36,10 @@ export default function Portfolio() {
   return (
     <>
       <SEO
-        title="Portfolio"
-        description="Explore Shansofts' portfolio of SaaS platforms, enterprise systems, dashboards, e-commerce and websites — built with React, Node.js, MongoDB and more."
+        title="Portfolio | SaaS, Enterprise Apps & Web Platforms"
+        description="Explore Shansofts portfolio: SaaS platforms, HR systems, dashboards, e-commerce and corporate websites built with React, Node.js, MongoDB and modern cloud stacks."
         path="/portfolio"
+        keywords="software development portfolio, SaaS case studies, React Node MongoDB projects"
         jsonLd={jsonLd}
       />
 
@@ -57,13 +58,13 @@ export default function Portfolio() {
                 key={c}
                 onClick={() => setActive(c)}
                 className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                  active === c ? 'text-white' : 'border border-slate-200 bg-white text-slate-600 hover:text-brand-700'
+                  active === c ? 'text-white' : 'border border-line bg-white text-body hover:text-brand-600'
                 }`}
               >
                 {active === c && (
                   <motion.span
                     layoutId="portfolio-filter-pill"
-                    className="absolute inset-0 -z-0 rounded-full bg-gradient-to-r from-brand-600 to-accent-500 shadow-glow"
+                    className="absolute inset-0 -z-0 rounded-full bg-brand-600"
                     transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                   />
                 )}
@@ -73,7 +74,7 @@ export default function Portfolio() {
           </div>
 
           {/* count */}
-          <p className="mt-6 text-center text-sm text-slate-400">
+          <p className="mt-6 text-center text-sm text-body">
             Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
             {active !== 'All' && ` in ${active}`}
           </p>

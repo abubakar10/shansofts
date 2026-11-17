@@ -1,0 +1,18 @@
+{
+  "name": "Shansofts",
+  "short_name": "Shansofts",
+  "description": "Custom software, web & mobile app development, cloud and AI solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16A34A",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

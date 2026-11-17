@@ -36,7 +36,7 @@ export const projects = [
     ],
     url: 'https://www.cpanelforless.com/',
     icon: FiServer,
-    gradient: 'from-indigo-500 via-brand-600 to-violet-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'hrm-system',
@@ -61,7 +61,7 @@ export const projects = [
     ],
     url: 'https://hrm-itcs-client.vercel.app/',
     icon: FiUsers,
-    gradient: 'from-emerald-500 to-teal-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'oneup-sales-dashboard',
@@ -82,7 +82,7 @@ export const projects = [
     ],
     url: null,
     icon: FiBarChart2,
-    gradient: 'from-sky-500 to-blue-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'rk-and-co-dashboard',
@@ -103,7 +103,7 @@ export const projects = [
     ],
     url: 'https://rkandco.online/',
     icon: FiGrid,
-    gradient: 'from-amber-500 to-orange-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'moneda-capital-group',
@@ -123,7 +123,7 @@ export const projects = [
     ],
     url: 'https://www.monedacapitalgroup.com/',
     icon: FiTrendingUp,
-    gradient: 'from-cyan-600 to-blue-700',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'property-dealer',
@@ -143,7 +143,7 @@ export const projects = [
     ],
     url: 'https://propertydealer.com.pk/',
     icon: FiHome,
-    gradient: 'from-rose-500 to-pink-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'ict-solutions',
@@ -163,7 +163,7 @@ export const projects = [
     ],
     url: 'https://ictsolutions.com.pk/',
     icon: FiGlobe,
-    gradient: 'from-violet-500 to-purple-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'progetto-santadi',
@@ -184,7 +184,7 @@ export const projects = [
     ],
     url: 'https://www.progettosantadi.it/',
     icon: FiGlobe,
-    gradient: 'from-green-500 to-emerald-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'terichmir-hunting',
@@ -204,7 +204,7 @@ export const projects = [
     ],
     url: 'https://terichmirhunting.com/',
     icon: FiGlobe,
-    gradient: 'from-orange-500 to-red-500',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'mavmet-automation-platform',
@@ -225,7 +225,7 @@ export const projects = [
     ],
     url: null,
     icon: FiZap,
-    gradient: 'from-fuchsia-500 to-purple-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'hostel-management-system',
@@ -247,7 +247,7 @@ export const projects = [
     ],
     url: null,
     icon: FiGrid,
-    gradient: 'from-teal-500 to-cyan-600',
+    gradient: 'bg-brand-600',
   },
   {
     slug: 'toefit-ecommerce',
@@ -268,7 +268,7 @@ export const projects = [
     ],
     url: null,
     icon: FiShoppingCart,
-    gradient: 'from-pink-500 to-rose-600',
+    gradient: 'bg-brand-600',
   },
 ]
 

@@ -3,37 +3,33 @@ import SEO from '../components/SEO'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import CTASection from '../components/CTASection'
+import Breadcrumbs from '../components/Breadcrumbs'
 import { services } from '../data/services'
-import { site } from '../data/site'
+import { breadcrumbSchema, organizationSchema, serviceListSchema } from '../utils/seo'
 
 export default function Services() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    itemListElement: services.map((s, i) => ({
-      '@type': 'Service',
-      position: i + 1,
-      name: s.title,
-      description: s.short,
-      provider: { '@type': 'Organization', name: site.name },
-    })),
-  }
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+  ]
 
   return (
     <>
       <SEO
-        title="Services"
-        description="Explore Shansofts services: web development, mobile apps, cloud & DevOps, AI, e-commerce, UI/UX design, custom software and security."
+        title="Software Development Services | Web, Mobile, Cloud & AI"
+        description="Shansofts software development services: custom software, MERN web apps, mobile apps, cloud & DevOps, AI automation, e-commerce, UI/UX and security QA."
         path="/services"
-        jsonLd={jsonLd}
+        keywords="software development services, web development company, mobile app development services, cloud DevOps services, AI development services"
+        jsonLd={[organizationSchema(), breadcrumbSchema(crumbs), serviceListSchema(services)]}
       />
 
       <section className="relative py-16 sm:py-20">
         <div className="container-app">
+          <Breadcrumbs items={crumbs} />
           <SectionHeading
             eyebrow="Our services"
-            title="Everything you need to build & scale"
-            subtitle="We offer all kinds of web, mobile and software development — plus the IT solutions to support them end to end."
+            title="Software & IT services to build and scale products"
+            subtitle="End-to-end web, mobile and custom software development — plus cloud, AI and QA support so your product stays reliable after launch."
           />
         </div>
       </section>
@@ -47,19 +43,19 @@ export default function Services() {
                 <motion.article
                   whileHover={{ y: -6 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="card group flex h-full gap-5 hover:border-brand-200 hover:shadow-card-hover"
+                  className="card group flex h-full gap-5 hover:border-brand-300 hover:shadow-card-hover"
                 >
-                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-100 to-accent-100 text-brand-600 shadow-sm transition-all duration-300 group-hover:from-brand-600 group-hover:to-accent-500 group-hover:text-white group-hover:shadow-glow">
-                    <Icon size={26} />
+                  <div className="shrink-0 text-brand-600">
+                    <Icon size={28} strokeWidth={1.75} />
                   </div>
                   <div>
-                    <h2 className="font-display text-xl font-semibold text-slate-900">{service.title}</h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{service.description}</p>
+                    <h2 className="font-display text-xl font-semibold text-heading">{service.title}</h2>
+                    <p className="mt-2 text-sm leading-relaxed text-body">{service.description}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {service.features.map((f) => (
                         <span
                           key={f}
-                          className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600"
+                          className="rounded-full border border-line bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700"
                         >
                           {f}
                         </span>

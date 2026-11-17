@@ -1,40 +1,54 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
-import Magnetic from './Magnetic'
 
 export default function CTASection() {
+  const [email, setEmail] = useState('')
+  const [sent, setSent] = useState(false)
+
+  function onSubmit(e) {
+    e.preventDefault()
+    if (!email.trim()) return
+    setSent(true)
+    setEmail('')
+  }
+
   return (
-    <section className="section">
+    <section className="section pt-8">
       <div className="container-app">
         <Reveal scale>
-          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-600 via-brand-700 to-grape-600 px-6 py-16 text-center shadow-glow sm:px-12">
-            {/* animated blobs */}
-            <div className="pointer-events-none absolute -right-16 -top-20 h-72 w-72 rounded-full bg-accent-400/40 blur-3xl animate-blob" />
-            <div className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-blush-400/40 blur-3xl animate-blob [animation-delay:4s]" />
-            <div className="pointer-events-none absolute inset-0 bg-grid-slate [background-size:32px_32px] opacity-20" />
-
+          <div className="relative overflow-hidden rounded-[2rem] bg-forest px-6 py-14 text-center text-white sm:px-12">
             <div className="relative">
-              <h2 className="font-display text-3xl font-bold text-white text-balance sm:text-4xl">
-                Let&apos;s build something great together
+              <h2 className="font-display text-3xl font-bold text-balance text-white sm:text-4xl">
+                Subscribe To Our Newsletter
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-brand-100">
-                Whether you have a fully-formed spec or just an idea, our team will help you turn it into a
-                reliable, scalable product.
+              <p className="mx-auto mt-4 max-w-xl text-white/75">
+                Product insights, delivery notes and practical IT ideas — no noise, just signal.
               </p>
-              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Magnetic>
-                  <Link
-                    to="/contact"
-                    className="btn bg-white text-brand-700 shadow-lg hover:shadow-2xl active:scale-[0.97]"
-                  >
-                    Start Your Project
-                  </Link>
-                </Magnetic>
-                <Link
-                  to="/portfolio"
-                  className="btn border border-white/40 bg-white/10 text-white backdrop-blur hover:bg-white/20"
-                >
-                  View Our Work
+              <form
+                onSubmit={onSubmit}
+                className="mx-auto mt-8 flex w-full max-w-lg flex-col gap-3 sm:flex-row"
+              >
+                <label htmlFor="newsletter-email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="newsletter-email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full min-w-0 flex-1 rounded-full border border-white/25 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/55 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/40"
+                />
+                <button type="submit" className="btn-white shrink-0">
+                  Subscribe
+                </button>
+              </form>
+              {sent && <p className="mt-3 text-sm text-brand-200">Thanks — you&apos;re on the list.</p>}
+              <div className="mt-8">
+                <Link to="/contact" className="text-sm font-medium text-white underline-offset-4 hover:text-brand-300 hover:underline">
+                  Or start a project conversation →
                 </Link>
               </div>
             </div>

@@ -3,29 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f8fafc" />
+    <meta name="theme-color" content="#16A34A" />
+    <meta name="color-scheme" content="light" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
 
     <!-- Primary Meta Tags -->
     <title>Shansofts | Custom Software, Web & Mobile App Development</title>
     <meta
       name="description"
-      content="Shansofts is an IT solutions company delivering custom software, web development, mobile apps, cloud, and AI solutions that scale your business."
+      content="Shansofts builds custom software, web apps, mobile apps, cloud & DevOps, and AI solutions that help startups and enterprises grow with reliable engineering."
     />
-    <meta name="keywords" content="Shansofts, software development company, web development, mobile app development, MERN stack, IT solutions, custom software, SaaS" />
+    <meta
+      name="keywords"
+      content="Shansofts, custom software development company, web development, mobile app development, MERN stack, IT solutions, SaaS development, AI software development, cloud DevOps"
+    />
     <meta name="author" content="Shansofts" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://www.shansofts.com/" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://www.shansofts.com/" />
     <meta property="og:title" content="Shansofts | Custom Software, Web & Mobile App Development" />
     <meta
       property="og:description"
-      content="We build custom software, websites, and mobile apps that help businesses grow. Explore our IT solutions."
+      content="Custom software, websites, mobile apps, cloud and AI solutions engineered for growth. Partner with Shansofts."
     />
-    <meta property="og:image" content="https://www.shansofts.com/og-image.png" />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&h=630&q=80"
+    />
     <meta property="og:site_name" content="Shansofts" />
 
     <!-- Twitter -->
@@ -33,37 +43,76 @@
     <meta name="twitter:title" content="Shansofts | Custom Software, Web & Mobile App Development" />
     <meta
       name="twitter:description"
-      content="We build custom software, websites, and mobile apps that help businesses grow. Explore our IT solutions."
+      content="Custom software, websites, mobile apps, cloud and AI solutions engineered for growth. Partner with Shansofts."
     />
-    <meta name="twitter:image" content="https://www.shansofts.com/og-image.png" />
+    <meta
+      name="twitter:image"
+      content="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&h=630&q=80"
+    />
 
-    <!-- Preconnect for fonts -->
+    <!-- Performance hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Organization structured data (JSON-LD) -->
+    <!-- Organization + WebSite structured data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Shansofts",
-        "url": "https://www.shansofts.com",
-        "logo": "https://www.shansofts.com/favicon.svg",
-        "description": "IT solutions company focused on custom software, web and mobile app development.",
-        "email": "info@shansofts.com",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "info@shansofts.com",
-          "contactType": "customer support"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/company/shansofts",
-          "https://twitter.com/shansofts",
-          "https://github.com/shansofts"
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.shansofts.com/#organization",
+            "name": "Shansofts",
+            "url": "https://www.shansofts.com",
+            "logo": "https://www.shansofts.com/logo.png",
+            "description": "IT solutions company focused on custom software, web and mobile app development, cloud and AI.",
+            "email": "info@shansofts.com",
+            "sameAs": [
+              "https://www.linkedin.com/company/shansofts",
+              "https://twitter.com/shansofts",
+              "https://github.com/shansofts",
+              "https://facebook.com/shansofts"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "info@shansofts.com",
+              "contactType": "sales",
+              "availableLanguage": ["English"]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.shansofts.com/#website",
+            "url": "https://www.shansofts.com",
+            "name": "Shansofts",
+            "publisher": { "@id": "https://www.shansofts.com/#organization" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://www.shansofts.com/blog?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.shansofts.com/#business",
+            "name": "Shansofts",
+            "url": "https://www.shansofts.com",
+            "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&h=630&q=80",
+            "priceRange": "$$",
+            "areaServed": "Worldwide",
+            "serviceType": [
+              "Custom Software Development",
+              "Web Development",
+              "Mobile App Development",
+              "Cloud & DevOps",
+              "AI Solutions"
+            ]
+          }
         ]
       }
     </script>
