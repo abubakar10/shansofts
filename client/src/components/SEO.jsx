@@ -14,10 +14,13 @@ export default function SEO({
   modifiedTime,
   author,
 }) {
+  // Brand first so browser tabs always show "Shansofts" when truncated.
   const fullTitle = title
-    ? title.includes(site.name)
+    ? title.startsWith(site.name)
       ? title
-      : `${title} | ${site.name}`
+      : title.includes(site.name)
+        ? `${site.name} | ${title.replace(new RegExp(`\\s*\\|?\\s*${site.name}\\s*\\|?\\s*`, 'i'), '').trim()}`
+        : `${site.name} | ${title}`
     : `${site.name} | Custom Software, Web & Mobile App Development`
   const url = `${site.domain}${path || '/'}`
   const ogImage = image || site.ogImage || `${site.domain}/og-image.png`

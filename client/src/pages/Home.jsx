@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Custom Software, Web & Mobile App Development Company"
+        title="Custom Software, Web & Mobile Apps"
         description="Hire Shansofts for custom software, MERN web apps, mobile development, cloud DevOps and AI features. Transparent delivery for startups and growing businesses."
         path="/"
         keywords="custom software development company, web app development, mobile app development, MERN stack developers, AI software development, cloud DevOps"

@@ -17,7 +17,7 @@ export default function About() {
   return (
     <>
       <SEO
-        title="About Shansofts | Custom Software & IT Solutions Team"
+        title="About Us"
         description="Learn about Shansofts — engineers, designers and strategists building custom software, web apps, mobile products and AI solutions for businesses worldwide."
         path="/about"
         keywords="about Shansofts, software development team, IT solutions company"

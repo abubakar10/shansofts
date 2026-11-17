@@ -36,7 +36,7 @@ export default function Portfolio() {
   return (
     <>
       <SEO
-        title="Portfolio | SaaS, Enterprise Apps & Web Platforms"
+        title="Portfolio"
         description="Explore Shansofts portfolio: SaaS platforms, HR systems, dashboards, e-commerce and corporate websites built with React, Node.js, MongoDB and modern cloud stacks."
         path="/portfolio"
         keywords="software development portfolio, SaaS case studies, React Node MongoDB projects"

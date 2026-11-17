@@ -16,7 +16,7 @@ export default function Services() {
   return (
     <>
       <SEO
-        title="Software Development Services | Web, Mobile, Cloud & AI"
+        title="Software Development Services"
         description="Shansofts software development services: custom software, MERN web apps, mobile apps, cloud & DevOps, AI automation, e-commerce, UI/UX and security QA."
         path="/services"
         keywords="software development services, web development company, mobile app development services, cloud DevOps services, AI development services"

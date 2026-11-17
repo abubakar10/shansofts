@@ -84,7 +84,7 @@ export default function Contact() {
   return (
     <>
       <SEO
-        title="Contact Shansofts | Free Software Project Quote"
+        title="Contact Us"
         description="Contact Shansofts for a free consultation on custom software, web apps, mobile apps, cloud or AI. We respond within one business day."
         path="/contact"
         keywords="contact software development company, free software quote, hire developers"

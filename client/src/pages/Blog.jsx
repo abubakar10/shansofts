@@ -16,7 +16,7 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Blog | Software, AI, Cloud & Product Delivery Insights"
+        title="Blog"
         description="Practical guides from Shansofts on custom software, SaaS MVPs, AI features, mobile stacks, DevOps and secure delivery — written to help you ship and grow."
         path="/blog"
         keywords="software development blog, SaaS MVP guide, AI for business apps, DevOps checklist, React Native vs Flutter"
