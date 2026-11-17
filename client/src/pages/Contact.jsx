@@ -21,19 +21,57 @@ export default function Contact() {
     e.preventDefault()
     setStatus('loading')
     setError('')
-    try {
+
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      company: form.company.trim(),
+      service: form.service,
+      message: form.message.trim(),
+    }
+
+    if (!payload.name || !payload.email || !payload.message) {
+      setStatus('error')
+      setError('Please fill in your name, email and project details.')
+      return
+    }
+
+    const send = async () => {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       })
       const data = await res.json().catch(() => ({}))
-      if (!res.ok) throw new Error(data.message || 'Something went wrong. Please try again.')
+      if (!res.ok) {
+        throw new Error(data.message || 'Something went wrong. Please try again.')
+      }
+      return data
+    }
+
+    try {
+      try {
+        await send()
+      } catch (firstErr) {
+        // One retry helps when the API briefly restarts during local --watch.
+        await new Promise((r) => setTimeout(r, 600))
+        await send()
+      }
       setStatus('success')
       setForm(initialForm)
     } catch (err) {
       setStatus('error')
-      setError(err.message)
+      const msg = err?.message || ''
+      if (
+        msg.includes('Failed to fetch') ||
+        msg.includes('NetworkError') ||
+        msg.includes('ECONNRESET') ||
+        msg.includes('Load failed')
+      ) {
+        setError('Could not reach the server. Make sure the API is running, then try again.')
+      } else {
+        setError(msg || 'Something went wrong. Please try again.')
+      }
     }
   }
 
